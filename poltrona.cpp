@@ -25,7 +25,7 @@ int imprimirMatriz(){
     int lin = 1;
     onibusCheio = true;
 
-    printf("\n        FILEIRA");
+    printf("\n       FILEIRAS");
     printf("\n   A  B  C  D  E  F");
     printf("\n");
 
@@ -50,6 +50,8 @@ int imprimirMatriz(){
         };
         printf("\n Poltrona reservada = X |");
         printf(" Poltrona livre = 0\n");
+        printf("Economica - Fileiras [B-E] |");
+        printf("Executiva - Fileiras [A-F]");
         return onibusCheio;
 }
 
@@ -60,6 +62,25 @@ int encerrarSistema(){
     system("cls");
     return continua;
 }
+
+int classePassagens(){
+    printf("\n Escolha sua classe: ");
+    printf("\n [1] Economica ");
+    printf("\n [2] Executiva ");
+
+    scanf("%i", &classeReserva);
+
+    switch (classeReserva)
+    {
+    case 1:
+        printf("\n Digite a fileira desejada (B-E): ");
+        break;
+    
+    case 2:
+        printf("\n Digite a fileira desejada (A-F): ");
+        break;
+    };
+};
 
 int main() {
 
@@ -85,22 +106,7 @@ int main() {
         };
         
 
-        printf("\n Escolha sua classe: ");
-        printf("\n [1] Economica ");
-        printf("\n [2] Executiva ");
-
-        scanf("%i", &classeReserva);
-
-        switch (classeReserva)
-        {
-        case 1:
-            printf("\n Digite a fileira desejada (B-E): ");
-            break;
-        
-        case 2:
-            printf("\n Digite a fileira desejada (A-F): ");
-            break;
-        };
+        classePassagens();
         
 
         //VERIFICAR FILEIRA
