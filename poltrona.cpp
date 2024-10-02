@@ -89,7 +89,7 @@ int main() {
         printf("\n [1] Economica ");
         printf("\n [2] Executiva ");
 
-        scanf("%i", classeReserva);
+        scanf("%i", &classeReserva);
 
         switch (classeReserva)
         {
@@ -100,13 +100,10 @@ int main() {
         case 2:
             printf("\n Digite a fileira desejada (A-F): ");
             break;
-        default:
-            break;
-        }
+        };
         
 
         //VERIFICAR FILEIRA
-        printf("\n Digite a fileira desejada (A-F): ");
         scanf( " %c", &fileira);
         
         //transformar de minuscula para maiuscula
