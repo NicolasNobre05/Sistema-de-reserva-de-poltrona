@@ -108,10 +108,18 @@ int main() {
 
         classePassagens();
         
-
         //VERIFICAR FILEIRA
         scanf( " %c", &fileira);
         
+        if (classeReserva == 1){
+            if (fileira == 'A' || fileira == 'F')
+            {
+                
+                printf("Fileiras invalidas para a sua classe");
+            };
+            
+        };
+
         //transformar de minuscula para maiuscula
         fileira = toupper(fileira);
 
