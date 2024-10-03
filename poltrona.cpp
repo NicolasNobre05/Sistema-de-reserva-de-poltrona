@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctype.h>
 
-
+//VARIAVEIS
 char fileira;
 int col;
 int poltrona;
@@ -11,6 +11,7 @@ char fileirasPermitidas[] = {'A','B', 'C', 'D', 'E', 'F'};
 char continua = 'S';
 bool onibusCheio;
 int classeReserva;
+
 
 char matriz[5][6] = {
         {'0', '0', '0', '0', '0', '0'},
@@ -20,19 +21,20 @@ char matriz[5][6] = {
         {'0', '0', '0', '0', '0', '0'}
     };
 
-
+//FUNÇÃO DE IMPRIMIR A MATRIZ E CABEÇALHO
 int imprimirMatriz(){
-    int lin = 1;
-    onibusCheio = true;
 
+    int lin = 1;
+    
+    printf("\n---------------------------------------------------------------------");
     printf("\n       FILEIRAS");
-    printf("\n   A  B  C  D  E  F");
-    printf("\n");
+    printf("\n   A  B  C  D  E  F\n");
 
     for (int i = 0; i < 5; ++i) {
             printf("%i", lin);
             printf("|");
             lin = lin + 1;
+
             for (int j = 0; j < 6; ++j) {
                 if(matriz[i][j] != 'X'){
                     onibusCheio= false;
@@ -48,10 +50,13 @@ int imprimirMatriz(){
             }
             printf("\n");
         };
+
         printf("\n Poltrona reservada = X |");
         printf(" Poltrona livre = 0\n");
-        printf("Economica - Fileiras [B-E] |");
-        printf("Executiva - Fileiras [A-F]");
+        printf(" Economica - Fileiras [B-E] |");
+        printf("Executiva - Fileiras [A-F]\n");
+        printf("\n---------------------------------------------------------------------");
+
         return onibusCheio;
 }
 
@@ -60,13 +65,21 @@ int encerrarSistema(){
     scanf(" %c", &continua);
     continua = toupper(continua);
     system("cls");
+
+    if (continua != 'S' && continua != 'N'){
+                system("cls");
+                printf("\033[37;41mOpcao invalida... \033[0m");
+                imprimirMatriz();
+                encerrarSistema();
+            };
+            
     return continua;
 }
 
 int classePassagens(){
     printf("\n Escolha sua classe: ");
     printf("\n [1] Economica ");
-    printf("\n [2] Executiva ");
+    printf("\n [2] Executiva \n");
 
     scanf("%i", &classeReserva);
 
@@ -79,56 +92,56 @@ int classePassagens(){
     case 2:
         printf("\n Digite a fileira desejada (A-F): ");
         break;
+
+    default:
+    system("cls");
+        printf("\n\033[37;41m opcao invalido....\033[0m\n");
+        imprimirMatriz();
+        classePassagens();
     };
+    return classeReserva;
 };
 
 int main() {
-
-    
 
     while (continua =='S'){
         //VERIAVEL QUE PRECISA SER REDEFINIDA A CADA CICLO
         int verificacaofileira = 0;
         
-        
-        //CABEÇALHO
-        printf("\n---------------------------------------------------------------------");
-        
         //imprimir matriz
         imprimirMatriz();
         
-        printf("\n---------------------------------------------------------------------");
-
         //VERIFICAR SE O ONIBUS NÃO ESTÁ LOTADO
         if (onibusCheio){
             printf("\n\033[37;41m Onibus cheio, aguarde o proximo \033[0m");
             break;
         };
         
-
         classePassagens();
-        
+
         //VERIFICAR FILEIRA
         scanf( " %c", &fileira);
         
-        if (classeReserva == 1){
-            if (fileira == 'A' || fileira == 'F')
-            {
-                
-                printf("Fileiras invalidas para a sua classe");
-            };
-            
-        };
-
         //transformar de minuscula para maiuscula
         fileira = toupper(fileira);
-
-        for (int o = 0; o <= 4; o++){
-            if (fileira == fileirasPermitidas[o]){
+        
+        if (classeReserva == 1){
+            for (int o = 1; o <= 4; o++){
+            if (fileira == fileirasPermitidas[o])
+            {
                 verificacaofileira = 1;
             }
+            
         }
-
+        }else if (classeReserva == 2)
+        {
+            for (int o = 0; o <= 5; o++){
+                if (fileira == fileirasPermitidas[o]){
+                    verificacaofileira = 1;
+                }
+            }
+        }
+        
         if (verificacaofileira == 0){
             system("cls");
             printf("\033[37;41m Fileira invalida... escolha uma valida \033[0m");
@@ -187,12 +200,6 @@ int main() {
             imprimirMatriz();
             printf("\n\033[30;42m Poltrona reservada: %c%i \033[0m\n",fileira,poltrona+1);
             encerrarSistema();
-
-            if (continua != 'S' && continua != 'N'){
-                system("cls");
-                printf("\033[37;41mOpcao invalida... \033[0m");
-                encerrarSistema();
-            };
         }
     }
 
